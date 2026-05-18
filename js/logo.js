@@ -171,7 +171,8 @@ function setupExploreButton() {
   border.setAttribute('stroke-linecap', 'round');
   border.setAttribute('filter', 'url(#photon-glow)');
   svg.appendChild(border);
-  const perim = border.getTotalLength();
+  // getTotalLength() returns 0 on iOS Safari before render; calculate directly
+  const perim = 2 * (W - 2 * R) + 2 * (H - 2 * R) + 2 * Math.PI * R;
   border.setAttribute('stroke-dasharray', perim);
   border.setAttribute('stroke-dashoffset', perim);
 
