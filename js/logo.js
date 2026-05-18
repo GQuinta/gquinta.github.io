@@ -25,12 +25,24 @@ function createLogo() {
   setTimeout(() => animateLogoDraw(), 500);
 }
 
+function elementLength(el) {
+  const tag = el.tagName.toLowerCase();
+  if (tag === 'line') {
+    return Math.hypot(
+      +el.getAttribute('x2') - +el.getAttribute('x1'),
+      +el.getAttribute('y2') - +el.getAttribute('y1')
+    );
+  }
+  if (tag === 'circle') return 2 * Math.PI * +el.getAttribute('r');
+  return el.getTotalLength();
+}
+
 function setStrokeHidden(element) {
   if (element.tagName.toLowerCase() === 'circle') {
     element.style.opacity = '0';
     element.style.transition = 'opacity 0.6s ease';
   } else {
-    const length = element.getTotalLength();
+    const length = elementLength(element);
     element.style.strokeDasharray = `${length} ${length}`;
     element.style.strokeDashoffset = length;
     element.style.opacity = '0';
@@ -74,7 +86,7 @@ function animateBlink(element) {
 
 function animateStroke(element, duration, counterclockwise = false) {
   return new Promise(resolve => {
-    const length = element.getTotalLength();
+    const length = elementLength(element);
     element.style.strokeDasharray = `${length} ${length}`;
     const startOffset = counterclockwise ? -length : length;
     element.style.strokeDashoffset = startOffset;
@@ -168,13 +180,13 @@ function setupExploreButton() {
   border.setAttribute('fill', 'none');
   border.setAttribute('stroke', '#4adeac');
   border.setAttribute('stroke-width', '2');
-  border.setAttribute('stroke-linecap', 'round');
+  border.setAttribute('stroke-linecap', 'butt');
   border.setAttribute('filter', 'url(#photon-glow)');
   svg.appendChild(border);
-  // getTotalLength() returns 0 on iOS Safari before render; calculate directly
-  const perim = 2 * (W - 2 * R) + 2 * (H - 2 * R) + 2 * Math.PI * R;
+  const perim = 2000; // larger than actual path; avoids getTotalLength on iOS and ensures full draw
   border.setAttribute('stroke-dasharray', perim);
   border.setAttribute('stroke-dashoffset', perim);
+  border.style.opacity = '0';
 
   const label = document.createElementNS(NS, 'text');
   label.setAttribute('x', W / 2); label.setAttribute('y', H / 2);
@@ -197,26 +209,22 @@ function setupExploreButton() {
 async function animateExploreButton() {
   if (!_exploreBorder) return;
 
+  _exploreBorder.style.opacity = '1';
   await new Promise(resolve => {
-    const dur = 800;
+    const borderDur = 2800;
+    const labelDur  = 600;
+    const labelStartAt = 0.3; // start fading text when border is 30% drawn
     let t0 = null;
     function step(ts) {
       if (!t0) t0 = ts;
-      const p = Math.min((ts - t0) / dur, 1);
-      _exploreBorder.setAttribute('stroke-dashoffset', _explorePerim * (1 - p));
-      p < 1 ? requestAnimationFrame(step) : resolve();
-    }
-    requestAnimationFrame(step);
-  });
-
-  await new Promise(resolve => {
-    const dur = 400;
-    let t0 = null;
-    function step(ts) {
-      if (!t0) t0 = ts;
-      const p = Math.min((ts - t0) / dur, 1);
-      _exploreLabel.style.opacity = p;
-      p < 1 ? requestAnimationFrame(step) : resolve();
+      const elapsed = ts - t0;
+      const bp = Math.min(elapsed / borderDur, 1);
+      _exploreBorder.setAttribute('stroke-dashoffset', _explorePerim * (1 - bp));
+      const labelElapsed = elapsed - borderDur * labelStartAt;
+      if (labelElapsed > 0) {
+        _exploreLabel.style.opacity = Math.min(labelElapsed / labelDur, 1);
+      }
+      bp < 1 ? requestAnimationFrame(step) : resolve();
     }
     requestAnimationFrame(step);
   });
