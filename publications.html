@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Publications · Gonçalo M. Quinta</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f5f5f3;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --border: rgba(0,0,0,0.1);
+      --border-md: rgba(0,0,0,0.2);
+      --blue-bg: #E6F1FB;
+      --blue-text: #0C447C;
+      --green-bg: #EAF3DE;
+      --green-text: #27500A;
+      --amber-bg: #FAEEDA;
+      --amber-text: #633806;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --bg-secondary: #242424;
+        --text: #f0f0f0;
+        --text-muted: #999;
+        --border: rgba(255,255,255,0.1);
+        --border-md: rgba(255,255,255,0.2);
+        --blue-bg: #0c2840;
+        --blue-text: #85B7EB;
+        --green-bg: #173404;
+        --green-text: #C0DD97;
+        --amber-bg: #412402;
+        --amber-text: #FAC775;
+      }
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2.5rem; border-bottom: 0.5px solid var(--border); }
+    .nav-name { font-size: 18px; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-size: 17px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a.active { font-weight: 500; }
+
+    .page { padding: 3.5rem 2.5rem; max-width: 860px; margin: 0 auto; }
+    .page-header { margin-bottom: 2.5rem; }
+    .page-header h1 { font-size: 40px; margin-bottom: 0.5rem; }
+    .page-header p { font-size: 15px; color: var(--text-muted); }
+
+    .filters { display: flex; gap: 8px; margin-bottom: 2rem; flex-wrap: wrap; }
+    .filter { font-size: 12px; padding: 5px 14px; border-radius: 99px; border: 0.5px solid var(--border); color: var(--text-muted); background: transparent; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+    .filter:hover { border-color: var(--border-md); color: var(--text); }
+    .filter.on { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+    .pub { padding: 1.1rem 0; border-bottom: 0.5px solid var(--border); display: flex; gap: 1.2rem; align-items: flex-start; }
+    .pub:last-child { border-bottom: none; }
+    .pub-type { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 99px; white-space: nowrap; margin-top: 3px; text-transform: uppercase; }
+    .type-journal  { background: var(--blue-bg);  color: var(--blue-text); }
+    .type-conference { background: var(--green-bg); color: var(--green-text); }
+    .type-workshop { background: var(--amber-bg); color: var(--amber-text); }
+
+    .pub-body { flex: 1; }
+    .pub-year { font-size: 12px; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; padding-top: 4px; }
+    .pub-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; line-height: 1.4; }
+    .pub-authors { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+    .pub-authors strong { color: var(--text); font-weight: 500; }
+    .pub-venue { font-size: 12px; color: var(--text-muted); font-style: italic; }
+    .pub-links { display: flex; gap: 10px; margin-top: 8px; }
+    .pub-link { font-size: 12px; color: var(--blue-text); text-decoration: none; }
+    .pub-link:hover { text-decoration: underline; }
+
+    @media (max-width: 700px) {
+      .page { padding: 2.5rem 1.5rem; }
+      nav { padding: 1.25rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="index.html">Gonçalo M. Quinta</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="publications.html" class="active">Publications</a>
+    <a href="cv.html">CV</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <h1>Publications</h1>
+    <p><a class="pub-link" href="https://inspirehep.net/authors/1287160" target="_blank" rel="noopener">iNSPIRE</a></p>
+    <p><a class="pub-link" href="https://scholar.google.com/citations?user=YEFeRcUAAAAJ&hl=pt-PT" target="_blank" rel="noopener">Google Scholar</a></p>
+    <p>26 papers</p>
+  </div>
+
+  <div class="filters">
+    <button class="filter on" onclick="setFilter(this,'All')">All</button>
+    <button class="filter" onclick="setFilter(this,'Journal')">Journal</button>
+    <button class="filter" onclick="setFilter(this,'Conference')">Conference</button>
+  </div>
+
+  <div id="pub-list"></div>
+</div>
+
+<script>
+  const pubs = [
+    // 2025
+    { year: 2025, type: 'Journal', title: 'Spacetime Grand Unified Theory', authors: 'Gonçalo M. Quinta', reference: '', arxiv: 'https://arxiv.org/abs/2507.11564' },
+    { year: 2025, type: 'Journal', title: 'Creation of wave packets for quantum chromodynamics on quantum computers', authors: 'Matteo Turco, Gonçalo M. Quinta, João Seixas, Yasser Omar', reference: 'Phys. Rev. D 112, 034506 (2025)', doi: 'https://doi.org/10.1103/2nb4-171l', arxiv: 'https://arxiv.org/abs/2501.13069' },
+    // 2024
+    { year: 2024, type: 'Journal', title: 'Finite temperature effective potential and its qubit interpretation', authors: 'Gonçalo M. Quinta, Antonino Flachi', reference: 'J. Phys. A Math. Theor. 58 245302', doi: 'https://doi.org/10.1088/1751-8121/ade025', arxiv: 'https://arxiv.org/abs/2312.17317' },
+    { year: 2024, type: 'Journal', title: 'Qubit Casimir effect', authors: 'Antonino Flachi, Gonçalo M. Quinta', reference: 'Phys. Rev. D 111, L061701 (2025)', doi: 'https://doi.org/10.1103/PhysRevD.111.L061701', arxiv: 'https://arxiv.org/abs/2412.20219' },
+    { year: 2024, type: 'Journal', title: 'Quantum Simulation of Bound State Scattering', authors: 'Matteo Turco, Gonçalo M. Quinta, João Seixas, Yasser Omar', reference: 'PRX Quantum 5, 020311 (2024)', doi: 'https://doi.org/10.1103/PRXQuantum.5.020311', arxiv: 'https://arxiv.org/abs/2305.07692' },
+    { year: 2024, type: 'Conference', title: 'Vacuum energy from qubit entropy', authors: 'Gonçalo M. Quinta, Antonino Flachi', reference: 'MG17 2024, Pescara', link: 'https://indico.icranet.org/event/8/contributions/1717/' },
+    { year: 2024, type: 'Conference', title: 'Lifshitz black holes and vacuum polarization', authors: 'Gonçalo M. Quinta, José P. S. Lemos', reference: 'MG14 2017, Rome', link: 'https://www.worldscientific.com/doi/abs/10.1142/9789813226609_0502' },
+    // 2023
+    { year: 2023, type: 'Journal', title: 'Multipartite Entanglement from Consecutive Scatterings', authors: 'Gonçalo M. Quinta, Rui André', reference: 'Phys. Rev. A 109, 022433 (2024)', doi: 'https://doi.org/10.1103/PhysRevA.109.022433', arxiv: 'https://arxiv.org/abs/2311.11102' },
+    // 2022
+    { year: 2022, type: 'Journal', title: 'The Qubit Picture of Virtual Particles', authors: 'Gonçalo M. Quinta', reference: 'Phys. Rev. A 108, 012424 (2023)', doi: 'https://doi.org/10.1103/PhysRevA.108.012424', arxiv: 'https://arxiv.org/abs/2211.05782' },
+    { year: 2022, type: 'Journal', title: 'Predicting leptonic CP violation via minimization of neutrino entanglement', authors: 'Gonçalo M. Quinta, Alexandre Sousa, Yasser Omar', reference: '', arxiv: 'https://arxiv.org/abs/2207.03303' },
+    // 2021
+    { year: 2021, type: 'Journal', title: 'Entanglement Classification via Single Entanglement Measure', authors: 'Adam Burchardt, Gonçalo M. Quinta, Rui André', reference: 'Phys. Rev. A 109, 032424 (2024)', doi: 'https://doi.org/10.1103/PhysRevA.109.032424', arxiv: 'https://arxiv.org/abs/2106.00850' },
+    { year: 2021, type: 'Journal', title: 'Quantum speedup for track reconstruction in particle accelerators', authors: 'Duarte Magano, Akshat Kumar, Mārtiņš Kālis, Andris Locāns, Adam Glos, Sagar Pratapsi, Gonçalo Quinta, Maksims Dimitrijevs, Aleksander Rivošs, Pedrame Bargassa, João Seixas, Andris Ambainis, Yasser Omar', reference: 'Phys. Rev. D 105, 076012 (2022)', doi: 'https://doi.org/10.1103/PhysRevD.105.076012', arxiv: 'https://arxiv.org/abs/2104.11583' },
+    // 2019
+    { year: 2019, type: 'Journal', title: 'Cut-resistant links and multipartite entanglement resistant to particle loss', authors: 'Gonçalo M. Quinta, Rui André, Adam Burchardt, Karol Życzkowski', reference: 'Phys. Rev. A 100, 062329 (2019)', doi: 'https://doi.org/10.1103/PhysRevA.100.062329', arxiv: 'https://arxiv.org/abs/1908.10390' },
+    { year: 2019, type: 'Journal', title: 'Thermodynamics and entropy of self-gravitating matter shells and black holes in d dimensions', authors: 'Rui André, José P. S. Lemos, Gonçalo M. Quinta', reference: 'Phys. Rev. D 99, 125013 (2019)', doi: 'https://doi.org/10.1103/PhysRevD.99.125013', arxiv: 'https://arxiv.org/abs/1905.05239' },
+    { year: 2019, type: 'Journal', title: 'Spontaneously broken symmetry restoration of quantum fields in the vicinity of neutral and electrically charged black holes', authors: 'Gonçalo M. Quinta, Antonino Flachi, José P. S. Lemos', reference: 'JHEP04 139 (2019)', doi: 'https://doi.org/10.1007/JHEP04%282019%29139', arxiv: 'https://arxiv.org/abs/1901.00218' },
+    // 2018
+    { year: 2018, type: 'Journal', title: 'Classifying Quantum Entanglement through Topological Links', authors: 'Gonçalo M. Quinta, Rui André', reference: 'Phys. Rev. A 97, 042307 (2018)', doi: 'https://doi.org/10.1103/PhysRevA.97.042307', arxiv: 'https://arxiv.org/abs/1803.08935' },
+    // 2017
+    { year: 2017, type: 'Journal', title: 'Quantum vacuum polarization around a Reissner-Nordström black hole in five dimensions', authors: 'Gonçalo M. Quinta, Antonino Flachi, José P. S. Lemos', reference: 'Phys. Rev. D 97, 025023 (2018)', doi: 'https://doi.org/10.1103/PhysRevD.97.025023', arxiv: 'https://arxiv.org/abs/1712.08171' },
+    { year: 2017, type: 'Conference', title: 'Spherical thin shells in d-dimensional general relativity: Thermodynamics and entropy', authors: 'Gonçalo M. Quinta, José P. S. Lemos', reference: 'MG14 2017, Rome', link: 'https://www.worldscientific.com/doi/10.1142/9789813226609_0155' },
+    // 2016
+    { year: 2016, type: 'Journal', title: 'Black Hole Quantum Vacuum Polarization in Higher Dimensions', authors: 'Antonino Flachi, Gonçalo M. Quinta, José P. S. Lemos', reference: 'Phys. Rev. D 94, 105001 (2016)', doi: 'https://doi.org/10.1103/PhysRevD.94.105001', arxiv: 'https://arxiv.org/abs/1609.06794' },
+    { year: 2016, type: 'Journal', title: 'Vacuum polarization in asymptotically Lifshitz black holes', authors: 'Gonçalo M. Quinta, Antonino Flachi, José P. S. Lemos', reference: 'Phys. Rev. D 93, 124073 (2016)', doi: 'https://doi.org/10.1103/PhysRevD.93.124073', arxiv: 'https://arxiv.org/abs/1604.00495' },
+    { year: 2016, type: 'Journal', title: 'Entropy of extremal black holes, horizon limits through charged thin shells, a unified approach', authors: 'José P. S. Lemos, Gonçalo M. Quinta, Oleg B. Zaslavskii', reference: 'Phys. Rev. D 93, 084008 (2016)', doi: 'https://doi.org/10.1103/PhysRevD.93.084008', arxiv: 'https://arxiv.org/abs/1603.01628' },
+    // 2015
+    { year: 2015, type: 'Journal', title: 'Entropy of a self-gravitating electrically charged thin shell and the black hole limit', authors: 'José P. S. Lemos, Gonçalo M. Quinta, Oleg B. Zaslavskii', reference: 'Phys. Rev. D 91, 104027 (2015)', doi: 'https://doi.org/10.1103/PhysRevD.91.104027', arxiv: 'https://arxiv.org/abs/1503.00018' },
+    { year: 2015, type: 'Journal', title: 'Entropy of an extremal electrically charged thin shell and the extremal black hole', authors: 'José P. S. Lemos, Gonçalo M. Quinta, Oleg B. Zaslavskii', reference: 'Phys. Lett. B 750, 306–311 (2015)', doi: 'https://doi.org/10.1016/j.physletb.2015.08.065', arxiv: 'https://arxiv.org/abs/1505.05875' },
+    { year: 2015, type: 'Journal', title: 'Compact stars with a small electric charge, the limiting radius to mass relation and the maximum mass for incompressible matter', authors: 'José P. S. Lemos, Francisco J. Lopes, Gonçalo Quinta, Vilson T. Zanchin', reference: 'Eur. Phys. J. C 75, 76 (2015)', doi: 'https://doi.org/10.1140/epjc/s10052-015-3274-3', arxiv: 'https://arxiv.org/abs/1408.1400' },
+    // 2014
+    { year: 2014, type: 'Journal', title: 'Entropy of thin shells in a (2+1)-dimensional asymptotically AdS spacetime and the BTZ black hole limit', authors: 'José P. S. Lemos, Gonçalo M. Quinta', reference: 'Phys. Rev. D 89, 084051 (2014)', doi: 'https://doi.org/10.1103/PhysRevD.89.084051', arxiv: 'https://arxiv.org/abs/1403.0579' },
+    // 2013
+    { year: 2013, type: 'Journal', title: 'Thermodynamics, entropy, and stability of thin shells in 2+1 flat spacetimes', authors: 'José P. S. Lemos, Gonçalo M. Quinta', reference: 'Phys. Rev. D 88, 067501 (2013)', doi: 'https://doi.org/10.1103/PhysRevD.88.067501', arxiv: 'https://arxiv.org/abs/1309.1478' },
+  ];
+
+  let active = 'All';
+
+  function setFilter(btn, val) {
+    document.querySelectorAll('.filter').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    active = val;
+    render();
+  }
+
+  function formatAuthors(str) {
+    return str
+      .replace(/Gonçalo M\. Quinta/g, '<strong>Gonçalo M. Quinta</strong>')
+      .replace(/Gonçalo Quinta/g, '<strong>Gonçalo Quinta</strong>');
+  }
+
+  function buildLinks(p) {
+    const links = [];
+    if (p.doi)  links.push(`<a class="pub-link" href="${p.doi}" target="_blank" rel="noopener">Link</a>`);
+    if (p.link) links.push(`<a class="pub-link" href="${p.link}" target="_blank" rel="noopener">Link</a>`);
+    if (p.arxiv) links.push(`<a class="pub-link" href="${p.arxiv}" target="_blank" rel="noopener">arXiv</a>`);
+    return links.join('');
+  }
+
+  function render() {
+    const filtered = [...(active === 'All' ? pubs : pubs.filter(p => p.type === active))]
+      .sort((a, b) => b.year - a.year);
+    document.getElementById('pub-list').innerHTML = filtered.map(p => `
+      <div class="pub">
+        <span class="pub-type type-${p.type.toLowerCase()}">${p.type}</span>
+        <div class="pub-body">
+          <div class="pub-title">${p.title}</div>
+          <div class="pub-authors">${formatAuthors(p.authors)}</div>
+          ${p.reference ? `<div class="pub-venue">${p.reference}</div>` : ''}
+          <div class="pub-links">${buildLinks(p)}</div>
+        </div>
+        <span class="pub-year">${p.year}</span>
+      </div>
+    `).join('');
+  }
+
+  render();
+</script>
+
+</body>
+</html>

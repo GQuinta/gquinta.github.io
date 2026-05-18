@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV · Gonçalo M. Quinta</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f5f5f3;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --border: rgba(0,0,0,0.1);
+      --border-md: rgba(0,0,0,0.2);
+      --blue-bg: #E6F1FB;   --blue-text: #0C447C;
+      --green-bg: #EAF3DE;  --green-text: #27500A;
+      --amber-bg: #FAEEDA;  --amber-text: #633806;
+      --purple-bg: #F3EEFF; --purple-text: #5A21B6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a; --bg-secondary: #242424;
+        --text: #f0f0f0; --text-muted: #999;
+        --border: rgba(255,255,255,0.1); --border-md: rgba(255,255,255,0.2);
+        --blue-bg: #0c2840;   --blue-text: #85B7EB;
+        --green-bg: #173404;  --green-text: #C0DD97;
+        --amber-bg: #412402;  --amber-text: #FAC775;
+        --purple-bg: #2a1a4a; --purple-text: #c4a7f0;
+      }
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    a { color: var(--blue-text); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2.5rem; border-bottom: 0.5px solid var(--border); }
+    .nav-name { font-size: 18px; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-size: 17px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a.active { font-weight: 500; }
+
+    .page { padding: 3.5rem 2.5rem; max-width: 860px; margin: 0 auto; }
+    h1 { font-size: 40px; margin-bottom: 3rem; }
+
+    /* ── Section shell ── */
+    .cv-section { margin-bottom: 3rem; }
+    .cv-section > h2 {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted); padding-bottom: 0.6rem; margin-bottom: 1.25rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    /* ── Shared badge ── */
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: 0.06em;
+      padding: 2px 9px; border-radius: 99px; white-space: nowrap; text-transform: uppercase; flex-shrink: 0;
+    }
+    .abbr { position: relative; display: inline-block; border-bottom: 1px dotted var(--text-muted); cursor: default; }
+    .abbr:hover .tag-tip { visibility: visible; opacity: 1; pointer-events: auto; }
+    .tag-wrap { position: relative; display: inline-block; flex-shrink: 0; }
+    .tag-tip {
+      visibility: hidden; opacity: 0; pointer-events: none;
+      position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+      padding-bottom: 6px; z-index: 20; transition: opacity 0.15s;
+    }
+    .tag-tip-inner {
+      background: #222; color: #fff; font-size: 12px; font-weight: 400;
+      letter-spacing: 0; text-transform: none; padding: 5px 10px;
+      border-radius: 6px; white-space: nowrap;
+    }
+    .tag-tip-inner a { color: #fff; text-decoration: underline; }
+    .tag-wrap:hover .tag-tip { visibility: visible; opacity: 1; pointer-events: auto; }
+    .tag-blue   { background: var(--blue-bg);   color: var(--blue-text); }
+    .tag-green  { background: var(--green-bg);  color: var(--green-text); }
+    .tag-amber  { background: var(--amber-bg);  color: var(--amber-text); }
+    .tag-purple { background: var(--purple-bg); color: var(--purple-text); }
+    .tag-red    { background: #fde8e8; color: #9b1c1c; }
+    .tag-pink   { background: #fce7f3; color: #9d174d; }
+    @media (prefers-color-scheme: dark) {
+      .tag-red  { background: #3b1010; color: #f87171; }
+      .tag-pink { background: #3b0a27; color: #f9a8d4; }
+    }
+
+    /* ── Awards & Funding ── */
+    .award-row {
+      display: flex; align-items: baseline; gap: 0.9rem;
+      padding: 0.75rem 0; border-bottom: 0.5px solid var(--border);
+    }
+    .award-row:last-child { border-bottom: none; }
+    .award-year { font-size: 12px; color: var(--text-muted); min-width: 34px; flex-shrink: 0; }
+    .award-title { flex: 1; font-size: 14px; line-height: 1.5; }
+    .award-title .sub { color: var(--text-muted); font-size: 13px; }
+    .award-amount { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; }
+    .award-tags { display: flex; gap: 5px; align-items: center; }
+
+    /* ── Teaching ── */
+    .teach-row {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.6rem 0; border-bottom: 0.5px solid var(--border);
+    }
+    .teach-row:last-child { border-bottom: none; }
+    .teach-year { font-size: 12px; color: var(--text-muted); min-width: 34px; flex-shrink: 0; }
+    .teach-body { flex: 1; font-size: 14px; line-height: 1.4; }
+    .teach-body .sub { color: var(--text-muted); font-size: 13px; }
+
+    /* ── Supervision ── */
+    .supervision-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0.85rem;
+    }
+    .s-card {
+      border: 0.5px solid var(--border); border-radius: 10px;
+      padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.35rem;
+    }
+    .s-card .s-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+    .s-card .s-name { font-size: 14px; font-weight: 500; }
+    .s-card .s-topic { font-size: 13px; color: var(--text-muted); line-height: 1.4; flex: 1; }
+    .s-card .s-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 0.25rem; }
+    .s-card .s-inst { font-size: 12px; color: var(--text-muted); }
+    .s-card .s-year { font-size: 12px; color: var(--text-muted); }
+
+    /* ── Refereeing ── */
+    .referee-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .referee-chip {
+      font-size: 13px; padding: 6px 16px; border-radius: 99px;
+      border: 0.5px solid var(--border-md); color: var(--text); background: var(--bg-secondary);
+    }
+
+    /* ── Invited talk rows ── */
+    .italk-row {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem;
+      padding: 0.6rem 0; border-bottom: 0.5px solid var(--border); font-size: 14px;
+    }
+    .italk-row:last-child { border-bottom: none; }
+    .italk-left { flex: 1; line-height: 1.4; }
+    .italk-left a { color: var(--text); border-bottom: 1px solid var(--border); text-decoration: none; }
+    .italk-left a:hover { border-color: var(--text); }
+    .italk-venue { color: var(--text-muted); font-size: 13px; }
+    .italk-year { font-size: 12px; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; }
+
+    /* ── Talk timeline ── */
+    .tl-group { margin-bottom: 1.4rem; }
+    .tl-year {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 0.6rem;
+    }
+    .tl-item {
+      display: flex; gap: 0.85rem; padding: 0.55rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--text-muted); margin-top: 8px; flex-shrink: 0; }
+    .tl-content { flex: 1; }
+    .tl-title { font-size: 14px; line-height: 1.4; color: var(--text); }
+    .tl-title a { color: var(--text); border-bottom: 1px solid var(--border); }
+    .tl-title a:hover { border-color: var(--text); text-decoration: none; }
+    .tl-venue { font-size: 13px; color: var(--text-muted); margin-top: 1px; }
+
+    /* ── Academic visits ── */
+    .visits-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .visit-card {
+      border: 0.5px solid var(--border); border-radius: 10px; padding: 0.7rem 1rem;
+    }
+    .visit-card .v-inst { font-size: 14px; font-weight: 500; }
+    .visit-card .v-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── Outreach ── */
+    .outreach-block { margin-bottom: 1.5rem; }
+    .outreach-block h3 {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 0.75rem;
+    }
+    .o-link-row { font-size: 14px; margin-bottom: 0.45rem; }
+    .o-link-row .o-desc { color: var(--text-muted); font-size: 13px; }
+    .o-item { padding: 0.55rem 0; border-bottom: 0.5px solid var(--border); font-size: 14px; line-height: 1.5; }
+    .o-item:last-child { border-bottom: none; }
+    .o-item .o-desc { color: var(--text-muted); font-size: 13px; display: block; margin-top: 1px; }
+
+    @media (max-width: 700px) {
+      .page { padding: 2.5rem 1.5rem; }
+      nav { padding: 1.25rem 1.5rem; }
+      .supervision-grid { grid-template-columns: 1fr; }
+      .award-row { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="index.html">Gonçalo M. Quinta</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="cv.html" class="active">CV</a>
+  </div>
+</nav>
+
+<div class="page">
+  <h1>CV</h1>
+
+  <!-- ── Awards & Funding ── -->
+  <section class="cv-section">
+    <h2>Awards &amp; Funding</h2>
+
+    <div class="award-row">
+      <span class="award-year">2026</span>
+      <span class="award-title">Visiting Researcher Grant FCT Mobility <span class="sub">(11 months)</span></span>
+      <div class="award-tags"><span class="tag-wrap"><span class="tag tag-blue">FCT</span><span class="tag-tip"><span class="tag-tip-inner"><a href="https://www.fct.pt/" target="_blank" rel="noopener">Foundation for Science and Technology</a></span></span></span></div>
+    </div>
+
+    <div class="award-row">
+      <span class="award-year">2021</span>
+      <span class="award-title">
+        <a href="https://sciproj.ptcris.pt/174853PRJ" target="_blank" rel="noopener">QEntHEP — Quantum Entanglement in High Energy Physics</a>
+        <span class="sub"> · Principal Investigator</span>
+      </span>
+      <span class="award-amount">€50 000</span>
+      <div class="award-tags"><span class="tag-wrap"><span class="tag tag-blue">FCT</span><span class="tag-tip"><span class="tag-tip-inner"><a href="https://www.fct.pt/" target="_blank" rel="noopener">Foundation for Science and Technology</a></span></span></span></div>
+    </div>
+
+    <div class="award-row">
+      <span class="award-year">2020</span>
+      <span class="award-title">Junior Researcher Contract <span class="sub">(6 years)</span></span>
+      <div class="award-tags"><span class="tag-wrap"><span class="tag tag-blue">FCT</span><span class="tag-tip"><span class="tag-tip-inner"><a href="https://www.fct.pt/" target="_blank" rel="noopener">Foundation for Science and Technology</a></span></span></span></div>
+    </div>
+
+    <div class="award-row">
+      <span class="award-year">2019</span>
+      <span class="award-title">1st place — Time Series Hackaton, Lisbon Data Science Academy <span class="sub">Batch #3</span></span>
+      <div class="award-tags"><span class="tag-wrap"><span class="tag tag-red">LDSA</span><span class="tag-tip"><span class="tag-tip-inner"><a href="https://www.lisbondatascience.org/" target="_blank" rel="noopener">Lisbon Data Science Academy</a></span></span></span></div>
+    </div>
+
+    <div class="award-row">
+      <span class="award-year">2019</span>
+      <span class="award-title">Postdoctoral Research Grant</span>
+      <div class="award-tags"><span class="tag-wrap"><span class="tag tag-amber">IT</span><span class="tag-tip"><span class="tag-tip-inner"><a href="https://www.it.pt/" target="_blank" rel="noopener">Telecommunications Institute</a></span></span></span></div>
+    </div>
+
+    <div class="award-row">
+      <span class="award-year">2014</span>
+      <span class="award-title">PhD National Scholarship <span class="sub">(4 years)</span></span>
+      <div class="award-tags"><span class="tag-wrap"><span class="tag tag-blue">FCT</span><span class="tag-tip"><span class="tag-tip-inner"><a href="https://www.fct.pt/" target="_blank" rel="noopener">Foundation for Science and Technology</a></span></span></span></div>
+    </div>
+
+    <div class="award-row">
+      <span class="award-year">2013</span>
+      <span class="award-title">Research Scholarship</span>
+      <div class="award-tags"><span class="tag-wrap"><span class="tag tag-green">CENTRA</span><span class="tag-tip"><span class="tag-tip-inner"><a href="https://centra.tecnico.ulisboa.pt/" target="_blank" rel="noopener">Center for Astrophysics and Gravitation</a></span></span></span><span class="tag-wrap"><span class="tag tag-blue">FCT</span><span class="tag-tip"><span class="tag-tip-inner"><a href="https://www.fct.pt/" target="_blank" rel="noopener">Foundation for Science and Technology</a></span></span></span></div>
+    </div>
+
+    <div class="award-row">
+      <span class="award-year">2012</span>
+      <span class="award-title">Scientific Initiation Scholarship</span>
+      <div class="award-tags"><span class="tag-wrap"><span class="tag tag-green">CENTRA</span><span class="tag-tip"><span class="tag-tip-inner"><a href="https://centra.tecnico.ulisboa.pt/" target="_blank" rel="noopener">Center for Astrophysics and Gravitation</a></span></span></span><span class="tag-wrap"><span class="tag tag-blue">FCT</span><span class="tag-tip"><span class="tag-tip-inner"><a href="https://www.fct.pt/" target="_blank" rel="noopener">Foundation for Science and Technology</a></span></span></span></div>
+    </div>
+
+    <div class="award-row">
+      <span class="award-year">2012</span>
+      <span class="award-title">
+        <a href="https://conselhopedagogico.tecnico.ulisboa.pt/premios-e-projetos/quadro-e-diplomas-de-merito/quadro-de-merito-academico-20112012/#meft" target="_blank" rel="noopener">Diploma of Academic Merit</a>
+        <span class="sub"> · 2011/2012</span>
+      </span>
+      <div class="award-tags"><span class="tag-wrap"><span class="tag tag-pink">IST</span><span class="tag-tip"><span class="tag-tip-inner"><a href="https://tecnico.ulisboa.pt/" target="_blank" rel="noopener">Superior Technical Institute</a></span></span></span></div>
+    </div>
+  </section>
+
+  <!-- ── Education ── -->
+  <section class="cv-section">
+    <h2>Education</h2>
+
+    <div class="italk-row">
+      <div class="italk-left">
+        <span class="tag tag-amber" style="margin-right:0.5rem;vertical-align:middle">PhD</span>
+        Theoretical Physics · <span class="abbr">IST<span class="tag-tip"><span class="tag-tip-inner"><a href="https://tecnico.ulisboa.pt/" target="_blank" rel="noopener">Instituto Superior Técnico</a></span></span></span>
+        · <a href="https://arxiv.org/abs/2005.13965" target="_blank" rel="noopener">Classical and Quantum Thermodynamic Systems in Curved Spacetime</a>
+      </div>
+      <span class="italk-year">2014 – 2018</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">
+        <span class="tag tag-blue" style="margin-right:0.5rem;vertical-align:middle">MSc</span>
+        Physics Engineering · <span class="abbr">IST<span class="tag-tip"><span class="tag-tip-inner"><a href="https://tecnico.ulisboa.pt/" target="_blank" rel="noopener">Instituto Superior Técnico</a></span></span></span>
+      </div>
+      <span class="italk-year">2011 – 2013</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">
+        <span class="tag tag-green" style="margin-right:0.5rem;vertical-align:middle">BSc</span>
+        Physics Engineering · <span class="abbr">IST<span class="tag-tip"><span class="tag-tip-inner"><a href="https://tecnico.ulisboa.pt/" target="_blank" rel="noopener">Instituto Superior Técnico</a></span></span></span>
+      </div>
+      <span class="italk-year">2008 – 2011</span>
+    </div>
+  </section>
+
+  <!-- ── Teaching ── -->
+  <section class="cv-section">
+    <h2>Teaching</h2>
+
+    <div class="teach-row">
+      <span class="teach-year">2025</span>
+      <span class="tag tag-purple">Professor</span>
+      <div class="teach-body">Statistics <span class="sub">· <span class="abbr">ESGTS<span class="tag-tip"><span class="tag-tip-inner"><a href="https://www.ipsantarem.pt/escola-superior-de-gestao-e-tecnologia-de-santarem/" target="_blank" rel="noopener">Escola Superior de Gestão e Tecnologia de Santarém</a></span></span></span></span></div>
+    </div>
+    <div class="teach-row">
+      <span class="teach-year">2025</span>
+      <span class="tag tag-purple">Professor</span>
+      <div class="teach-body">Applied Mathematics <span class="sub">· <span class="abbr">ESGTS<span class="tag-tip"><span class="tag-tip-inner"><a href="https://www.ipsantarem.pt/escola-superior-de-gestao-e-tecnologia-de-santarem/" target="_blank" rel="noopener">Escola Superior de Gestão e Tecnologia de Santarém</a></span></span></span></span></div>
+    </div>
+    <div class="teach-row">
+      <span class="teach-year">2024</span>
+      <span class="tag tag-purple">Professor</span>
+      <div class="teach-body">Applied Mathematics <span class="sub">· <span class="abbr">ESGTS<span class="tag-tip"><span class="tag-tip-inner"><a href="https://www.ipsantarem.pt/escola-superior-de-gestao-e-tecnologia-de-santarem/" target="_blank" rel="noopener">Escola Superior de Gestão e Tecnologia de Santarém</a></span></span></span></span></div>
+    </div>
+    <div class="teach-row">
+      <span class="teach-year">2023</span>
+      <span class="tag tag-amber">Jury</span>
+      <div class="teach-body">Flow-model Capacity For Large Scale Quantum Complex Networks <span class="sub">· Ricardo Quintas (MSc)</span></div>
+    </div>
+    <div class="teach-row">
+      <span class="teach-year">2020</span>
+      <span class="tag tag-blue">Lecturer</span>
+      <div class="teach-body">Physics of Classical and Quantum Information <span class="sub">· <span class="abbr">IST<span class="tag-tip"><span class="tag-tip-inner"><a href="https://tecnico.ulisboa.pt/" target="_blank" rel="noopener">Instituto Superior Técnico</a></span></span></span></span></div>
+    </div>
+    <div class="teach-row">
+      <span class="teach-year">2019</span>
+      <span class="tag tag-amber">Jury</span>
+      <div class="teach-body">Quantum Simulations of Hadronic Systems <span class="sub">· Diogo Cruz (MSc) · <span class="abbr">IST<span class="tag-tip"><span class="tag-tip-inner"><a href="https://tecnico.ulisboa.pt/" target="_blank" rel="noopener">Instituto Superior Técnico</a></span></span></span></span></div>
+    </div>
+    <div class="teach-row">
+      <span class="teach-year">2019</span>
+      <span class="tag tag-green">TA</span>
+      <div class="teach-body">Physics of Classical and Quantum Information <span class="sub">· <span class="abbr">IST<span class="tag-tip"><span class="tag-tip-inner"><a href="https://tecnico.ulisboa.pt/" target="_blank" rel="noopener">Instituto Superior Técnico</a></span></span></span></span></div>
+    </div>
+    <div class="teach-row">
+      <span class="teach-year">2018</span>
+      <span class="tag tag-green">TA</span>
+      <div class="teach-body">Laboratory of Introduction to Experimental Physics <span class="sub">· <span class="abbr">IST<span class="tag-tip"><span class="tag-tip-inner"><a href="https://tecnico.ulisboa.pt/" target="_blank" rel="noopener">Instituto Superior Técnico</a></span></span></span></span></div>
+    </div>
+    <div class="teach-row">
+      <span class="teach-year">2017</span>
+      <span class="tag tag-green">TA</span>
+      <div class="teach-body">Mechanics and Waves <span class="sub">· <span class="abbr">IST<span class="tag-tip"><span class="tag-tip-inner"><a href="https://tecnico.ulisboa.pt/" target="_blank" rel="noopener">Instituto Superior Técnico</a></span></span></span></span></div>
+    </div>
+    <div class="teach-row">
+      <span class="teach-year">2016</span>
+      <span class="tag tag-blue">Lecturer</span>
+      <div class="teach-body">8th School of Astrophysics and Gravitation <span class="sub">· <span class="abbr">CENTRA<span class="tag-tip"><span class="tag-tip-inner"><a href="https://centra.tecnico.ulisboa.pt/" target="_blank" rel="noopener">Center for Astrophysics and Gravitation</a></span></span></span></span></div>
+    </div>
+    <div class="teach-row">
+      <span class="teach-year">2016</span>
+      <span class="tag tag-green">TA</span>
+      <div class="teach-body">Mechanics and Waves <span class="sub">· <span class="abbr">IST<span class="tag-tip"><span class="tag-tip-inner"><a href="https://tecnico.ulisboa.pt/" target="_blank" rel="noopener">Instituto Superior Técnico</a></span></span></span></span></div>
+    </div>
+    <div class="teach-row">
+      <span class="teach-year">2015</span>
+      <span class="tag tag-green">TA</span>
+      <div class="teach-body">Thermodynamics and Structure of Matter <span class="sub">· <span class="abbr">IST<span class="tag-tip"><span class="tag-tip-inner"><a href="https://tecnico.ulisboa.pt/" target="_blank" rel="noopener">Instituto Superior Técnico</a></span></span></span></span></div>
+    </div>
+  </section>
+
+  <!-- ── Supervision ── -->
+  <section class="cv-section">
+    <h2>Supervision</h2>
+    <div class="supervision-grid">
+      <div class="s-card">
+        <div class="s-top">
+          <span class="s-name">Adriano Fonseca</span>
+          <span class="tag tag-blue">BSc</span>
+        </div>
+        <span class="s-topic">Quantum machine learning for HEP signal detection</span>
+        <div class="s-bottom"><span class="s-inst">IST</span><span class="s-year">2026</span></div>
+      </div>
+      <div class="s-card">
+        <div class="s-top">
+          <span class="s-name">Maria Teresa</span>
+          <span class="tag tag-blue">BSc</span>
+        </div>
+        <span class="s-topic">Neutrino Entanglement</span>
+        <div class="s-bottom"><span class="s-inst">IST</span><span class="s-year">2025</span></div>
+      </div>
+      <div class="s-card">
+        <div class="s-top">
+          <span class="s-name">Rui André</span>
+          <span class="tag tag-purple">Postdoc</span>
+        </div>
+        <span class="s-topic">Quantum Entanglement in Particle Physics</span>
+        <div class="s-bottom"><span class="s-inst">IT</span><span class="s-year">2023</span></div>
+      </div>
+      <div class="s-card">
+        <div class="s-top">
+          <span class="s-name">Gabriel Rouxinol</span>
+          <span class="tag tag-blue">BSc</span>
+        </div>
+        <span class="s-topic">Quantum Simulation of Neutrino Flavour Entanglement</span>
+        <div class="s-bottom"><span class="s-inst">Gulbenkian New Talents</span><span class="s-year">2022</span></div>
+      </div>
+      <div class="s-card">
+        <div class="s-top">
+          <span class="s-name">Matteo Turco</span>
+          <span class="tag tag-amber">PhD</span>
+        </div>
+        <span class="s-topic">Quantum Simulation of High Energy Physics</span>
+        <div class="s-bottom"><span class="s-inst">IST</span><span class="s-year">2021</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Refereeing ── -->
+  <section class="cv-section">
+    <h2>Refereeing</h2>
+    <div class="referee-chips">
+      <span class="referee-chip">Physical Review D</span>
+      <span class="referee-chip">Physical Review A</span>
+    </div>
+  </section>
+
+  <!-- ── Invited Talks ── -->
+  <section class="cv-section">
+    <h2>Invited Talks</h2>
+
+    <div class="italk-row">
+      <div class="italk-left">Spacetime Grand Unified Theory <span class="italk-venue">· Centre for Theoretical Particle Physics, IST, Lisbon</span></div>
+      <span class="italk-year">2026</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">PhD Alumni Talk <span class="italk-venue">· Technical Superior Institute, Lisbon</span></div>
+      <span class="italk-year">2025</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">The Quantum States of Virtual Particles <span class="italk-venue">· Physics Department, Keio University, Hiyoshi</span></div>
+      <span class="italk-year">2023</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">The Quantum States of Virtual Particles <span class="italk-venue">· Center of Physics and Engineering of Advanced Materials, IST, Lisbon</span></div>
+      <span class="italk-year">2023</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">The Quantum Operators of Virtual Particles <span class="italk-venue">· Centre for Theoretical Particle Physics, IST, Lisbon</span></div>
+      <span class="italk-year">2023</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="https://tqft.math.tecnico.ulisboa.pt/seminars?id=5840" target="_blank" rel="noopener">Topological Links and Quantum Entanglement</a> <span class="italk-venue">· Topological Quantum Field Theory Mini Workshop, Lisbon</span></div>
+      <span class="italk-year">2020</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">Alumni Talk <span class="italk-venue">· Physics Seminar Series 6th Edition, IST, Lisbon</span></div>
+      <span class="italk-year">2020</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">Quantum entanglement and knots <span class="italk-venue">· Atomic Physics Department, Jagiellonian University, Kraków</span></div>
+      <span class="italk-year">2019</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">Topological Links and Quantum Entanglement <span class="italk-venue">· Mathematics Department, IST, Lisbon</span></div>
+      <span class="italk-year">2019</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="https://www.it.pt/Events/Event/4452" target="_blank" rel="noopener">Classifying quantum entanglement through topological links</a> <span class="italk-venue">· Instituto de Telecomunicações, Lisbon</span></div>
+      <span class="italk-year">2018</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">Quantum Field Theory in Curved Spacetime <span class="italk-venue">· Physics Group, University of Algarve</span></div>
+      <span class="italk-year">2017</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="http://caaul.oal.ul.pt/en/seminarios" target="_blank" rel="noopener">Black hole entropy through thin matter shells</a> <span class="italk-venue">· Center of Astronomy and Astrophysics, University of Lisbon</span></div>
+      <span class="italk-year">2013</span>
+    </div>
+  </section>
+
+  <!-- ── Conference Talks ── -->
+  <section class="cv-section">
+    <h2>Conference Talks</h2>
+
+    <div class="italk-row">
+      <div class="italk-left"><a href="https://indico.math.cnrs.fr/event/11461/contributions/12686/" target="_blank" rel="noopener">Qubit Picture of the Vacuum Energy</a> <span class="italk-venue">· Avenues of Quantum Field Theory in Curved Spacetime, Tours</span></div>
+      <span class="italk-year">2025</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="https://indico.icranet.org/event/8/contributions/1717/" target="_blank" rel="noopener">Vacuum Energy from Qubit Entropy</a> <span class="italk-venue">· XVII Marcel Grossmann Meeting, Pescara</span></div>
+      <span class="italk-year">2024</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="https://strong-gr.com/qftcs-workshop-iii/schedule/" target="_blank" rel="noopener">Vacuum Energy from Qubit Entropy</a> <span class="italk-venue">· XI Black Hole Workshop, Lisbon</span></div>
+      <span class="italk-year">2024</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="https://centra.tecnico.ulisboa.pt/network/grit/bhw11/program/" target="_blank" rel="noopener">Symmetry restoration of quantum fields around charged black holes</a> <span class="italk-venue">· XI Black Hole Workshop, Lisbon</span></div>
+      <span class="italk-year">2018</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">Classifying quantum entanglement through topological links <span class="italk-venue">· Multipartite Entanglement conference, Benasque</span></div>
+      <span class="italk-year">2018</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="https://home.hiroshima-u.ac.jp/~jgrg27/files/Gon_alo_Quinta.pdf" target="_blank" rel="noopener">Vacuum polarization around a charged black hole in 5 dimensions</a> <span class="italk-venue">· 27th Workshop on General Relativity and Gravitation, Japan</span></div>
+      <span class="italk-year">2017</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="http://w3.math.uminho.pt/bhw9/Abstract.php?name=GoncaloQuinta" target="_blank" rel="noopener">Vacuum polarization in a 5-dimensional spacetime</a> <span class="italk-venue">· IX Black Hole Workshop, Minho</span></div>
+      <span class="italk-year">2016</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="https://erep2016.tecnico.ulisboa.pt/erep2016/programme/" target="_blank" rel="noopener">Vacuum polarization near Lifshitz black holes</a> <span class="italk-venue">· Spanish-Portuguese Relativity Meeting, Lisbon</span></div>
+      <span class="italk-year">2016</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="http://www.gr21.org/program.html" target="_blank" rel="noopener">Quantum Vacuum polarization in Large Dimensional Spacetimes</a> <span class="italk-venue">· 21st International Conference on General Relativity and Gravitation, New York</span></div>
+      <span class="italk-year">2016</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="http://www.icra.it/mg/mg14/parallel_sessions.htm" target="_blank" rel="noopener">Vacuum polarization around Lifshitz black holes</a> <span class="italk-venue">· 14th Marcel Grossmann Meeting, Rome</span></div>
+      <span class="italk-year">2015</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="http://www.icra.it/mg/mg14/parallel_sessions.htm" target="_blank" rel="noopener">Entropy of d-dimensional thin shells and black hole limit</a> <span class="italk-venue">· 14th Marcel Grossmann Meeting, Rome</span></div>
+      <span class="italk-year">2015</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">Black hole entropy in d-dimensions through thin matter shells <span class="italk-venue">· VII Black Hole Workshop, Aveiro</span></div>
+      <span class="italk-year">2014</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="https://eventos.spf.pt/fisica2014/pt/programa" target="_blank" rel="noopener">Black hole entropy in d-dimensions through thin matter shells</a> <span class="italk-venue">· 19th Physics National Conference, Lisbon</span></div>
+      <span class="italk-year">2014</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">Thermodynamics and entropy of shells in 2+1 dimensional AdS spacetimes and the BTZ black hole limit <span class="italk-venue">· VI Black Hole Workshop, Braga</span></div>
+      <span class="italk-year">2013</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left"><a href="http://gr20-amaldi10.edu.pl/" target="_blank" rel="noopener">Extremal versus non-extremal black hole entropy: a thermodynamic approach</a> <span class="italk-venue">· GR20/Amaldi10, Warsaw</span></div>
+      <span class="italk-year">2013</span>
+    </div>
+  </section>
+
+  <!-- ── Poster Sessions ── -->
+  <section class="cv-section">
+    <h2>Poster Sessions</h2>
+
+    <div class="italk-row">
+      <div class="italk-left">Qubit Picture of Virtual Particles <span class="italk-venue">· YIPQS Long-term Workshop on Quantum Information, Quantum Matter and Quantum Gravity, Kyoto</span></div>
+      <span class="italk-year">2023</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">Classifying quantum entanglement through topological links <span class="italk-venue">· Multipartite Entanglement conference, Benasque</span></div>
+      <span class="italk-year">2018</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">Vacuum polarization around Lifshitz black holes <span class="italk-venue">· Black Hole Workshop VIII, Lisbon</span></div>
+      <span class="italk-year">2015</span>
+    </div>
+    <div class="italk-row">
+      <div class="italk-left">Vacuum polarization around Lifshitz black holes <span class="italk-venue">· GR 100 Years, Lisbon</span></div>
+      <span class="italk-year">2015</span>
+    </div>
+  </section>
+
+  <!-- ── Academic Visits ── -->
+  <section class="cv-section">
+    <h2>Academic Visits</h2>
+    <div class="visits-row">
+      <div class="visit-card">
+        <div class="v-inst"><a href="https://mcfp.physics.umd.edu/?option=com_content&view=article&id=135" target="_blank" rel="noopener">University of Maryland</a></div>
+        <div class="v-meta">USA · 2026</div>
+      </div>
+      <div class="visit-card">
+        <div class="v-inst"><a href="https://www.keio.ac.jp/en/about/campus/hiyoshi/" target="_blank" rel="noopener">Keio University</a></div>
+        <div class="v-meta">Japan · 2023</div>
+      </div>
+      <div class="visit-card">
+        <div class="v-inst"><a href="https://www.keio.ac.jp/en/about/campus/hiyoshi/" target="_blank" rel="noopener">Keio University</a></div>
+        <div class="v-meta">Japan · 2017</div>
+      </div>
+      <div class="visit-card">
+        <div class="v-inst"><a href="https://www.icla.ygu.ac.jp/en/" target="_blank" rel="noopener">Int'l College of Liberal Arts</a></div>
+        <div class="v-meta">Japan · 2016</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Outreach ── -->
+  <section class="cv-section">
+    <h2>Outreach</h2>
+
+    <div class="outreach-block">
+      <h3>Websites</h3>
+      <div class="o-link-row">
+        <a href="https://qenthep.github.io/" target="_blank" rel="noopener">qenthep.github.io</a>
+        <span class="o-desc"> — QEntHEP project website</span>
+      </div>
+      <div class="o-link-row">
+        <a href="https://medium.com/@gquinta" target="_blank" rel="noopener">medium.com/@gquinta</a>
+        <span class="o-desc"> — Medium blog</span>
+      </div>
+    </div>
+
+    <div class="outreach-block">
+      <h3>Talks</h3>
+      <div class="o-item">
+        "As forças fundamentais da Natureza" <em>(The fundamental forces of Nature)</em>
+        <span class="o-desc">Palmela Highschool · 2023</span>
+      </div>
+      <div class="o-item">
+        "Física quântica para principiantes" <em>(Quantum mechanics for beginners)</em>
+        <span class="o-desc">Fever Talks, Lisbon · 2021</span>
+      </div>
+      <div class="o-item">
+        "100 anos de Relatividade Geral" <em>(100 years of General Relativity)</em>
+        <span class="o-desc">Palmela Highschool · 2016</span>
+      </div>
+      <div class="o-item">
+        "One Hundred Years of Gravity: The Centenary of Einstein's Discovery"
+        <span class="o-desc">iCLA, Japan · 2015</span>
+      </div>
+    </div>
+
+    <div class="outreach-block">
+      <h3>Articles</h3>
+      <div class="o-item">
+        "Ondas gravitacionais (revisited*)"
+        <span class="o-desc">Pulsar, Physics students magazine, IST · 2016</span>
+      </div>
+      <div class="o-item">
+        "Uma abordagem termodinâmica à entropia de buracos negros"
+        <span class="o-desc">Técnica, students magazine, IST · 2013</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

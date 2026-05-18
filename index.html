@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GQ - Home</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f5f5f3;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --text-hero-desc: #888;
+      --border: rgba(0,0,0,0.1);
+      --border-md: rgba(0,0,0,0.2);
+      --blue-bg: #E6F1FB;
+      --blue-text: #0C447C;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --bg-secondary: #242424;
+        --text: #f0f0f0;
+        --text-muted: #999;
+        --text-hero-desc: #bbb;
+        --border: rgba(255,255,255,0.1);
+        --border-md: rgba(255,255,255,0.2);
+        --blue-bg: #0c2840;
+        --blue-text: #85B7EB;
+      }
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2.5rem; border-bottom: 0.5px solid var(--border); }
+    .nav-name { font-size: 18px; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-size: 17px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a.active { font-weight: 500; }
+    .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding: 5rem 2.5rem 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .hero-left { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+    .avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg); box-shadow: 0 0 0 1px var(--border); }
+    .social-links { display: flex; gap: 0.75rem; align-items: center; }
+    .social-link { color: var(--text-muted); transition: color 0.2s; display: flex; }
+    .social-link:hover { color: var(--text); }
+    .hero-left h2 { font-size: 26px; color: var(--text); line-height: 1.2; }
+    .hero-left p { font-size: 15px; line-height: 1.7; color: var(--text-hero-desc); }
+    .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { padding: 10px 22px; border-radius: 99px; font-size: 13px; font-weight: 500; text-decoration: none; cursor: pointer; border: 0.5px solid; transition: opacity 0.2s; display: inline-block; font-family: 'DM Sans', sans-serif; }
+    .btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .btn-outline { background: transparent; color: var(--text); border-color: var(--border-md); }
+    .btn:hover { opacity: 0.75; }
+    .hero-right { display: flex; align-items: center; justify-content: center; }
+    .logo-wrapper { background: #111; border-radius: 16px; display: flex; flex-direction: column; align-items: center; padding-bottom: 1.5rem; }
+    #explore-button { margin-top: -47px; }
+    .logo-shell { width: 300px; height: 300px; background: none; border-radius: 0; }
+    .logo-shell .logo-svg { width: 100%; height: 100%; }
+    #whiteCircle { filter: drop-shadow(0 0 3px rgba(255,255,255,0.55)); }
+    #redCircle   { filter: drop-shadow(0 0 3px rgba(239,68,68,0.55)); }
+    #greenCircle { filter: drop-shadow(0 0 3px rgba(34,197,94,0.55)); }
+    #blueCircle  { filter: drop-shadow(0 0 3px rgba(56,189,248,0.55)); }
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      nav { padding: 1.25rem 1.5rem; }
+      .logo-shell { width: 240px; height: 240px; }
+      #explore-button { margin-top: -37px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="index.html">Gonçalo M. Quinta</a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="cv.html">CV</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <img class="avatar" src="photo.jpg" alt="Gonçalo Quinta" />
+    <p>I'm a theoretical physicist working on the unification of the fundamental forces of Nature. My past work includes black holes, quantum field theory in curved spacetime, quantum information and quantum computation.</p>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="mailto:goncalo.quinta@tecnico.ulisboa.pt">Get in touch</a>
+      <a class="btn btn-outline" href="publications.html">View publications</a>
+    </div>
+    <div class="social-links">
+      <a class="social-link" href="https://www.linkedin.com/in/goncaloquinta" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+      <a class="social-link" href="https://medium.com/@gquinta" target="_blank" rel="noopener" aria-label="Medium">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="logo-wrapper">
+      <div class="logo-shell" id="logo-shell" aria-hidden="true"></div>
+      <div id="explore-button"></div>
+    </div>
+  </div>
+</div>
+
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="photon-glow" x="-20%" y="-120%" width="140%" height="340%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+      <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+  </defs>
+</svg>
+<script src="js/logo.js" defer></script>
+
+</body>
+</html>
