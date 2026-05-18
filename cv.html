@@ -10,27 +10,13 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --bg: #ffffff;
-      --bg-secondary: #f5f5f3;
-      --text: #1a1a1a;
-      --text-muted: #6b6b6b;
-      --border: rgba(0,0,0,0.1);
-      --border-md: rgba(0,0,0,0.2);
-      --blue-bg: #E6F1FB;   --blue-text: #0C447C;
-      --green-bg: #EAF3DE;  --green-text: #27500A;
-      --amber-bg: #FAEEDA;  --amber-text: #633806;
-      --purple-bg: #F3EEFF; --purple-text: #5A21B6;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #1a1a1a; --bg-secondary: #242424;
-        --text: #f0f0f0; --text-muted: #999;
-        --border: rgba(255,255,255,0.1); --border-md: rgba(255,255,255,0.2);
-        --blue-bg: #0c2840;   --blue-text: #85B7EB;
-        --green-bg: #173404;  --green-text: #C0DD97;
-        --amber-bg: #412402;  --amber-text: #FAC775;
-        --purple-bg: #2a1a4a; --purple-text: #c4a7f0;
-      }
+      --bg: #1a1a1a; --bg-secondary: #242424;
+      --text: #f0f0f0; --text-muted: #999;
+      --border: rgba(255,255,255,0.1); --border-md: rgba(255,255,255,0.2);
+      --blue-bg: #0c2840;   --blue-text: #85B7EB;
+      --green-bg: #173404;  --green-text: #C0DD97;
+      --amber-bg: #412402;  --amber-text: #FAC775;
+      --purple-bg: #2a1a4a; --purple-text: #c4a7f0;
     }
     body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     a { color: var(--blue-text); text-decoration: none; }
@@ -78,12 +64,8 @@
     .tag-green  { background: var(--green-bg);  color: var(--green-text); }
     .tag-amber  { background: var(--amber-bg);  color: var(--amber-text); }
     .tag-purple { background: var(--purple-bg); color: var(--purple-text); }
-    .tag-red    { background: #fde8e8; color: #9b1c1c; }
-    .tag-pink   { background: #fce7f3; color: #9d174d; }
-    @media (prefers-color-scheme: dark) {
-      .tag-red  { background: #3b1010; color: #f87171; }
-      .tag-pink { background: #3b0a27; color: #f9a8d4; }
-    }
+    .tag-red    { background: #3b1010; color: #f87171; }
+    .tag-pink   { background: #3b0a27; color: #f9a8d4; }
 
     /* ── Awards & Funding ── */
     .award-row {
