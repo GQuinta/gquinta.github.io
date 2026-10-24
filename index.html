@@ -27,18 +27,20 @@
     .nav-links a { font-size: 17px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--text); }
     .nav-links a.active { font-weight: 500; }
-    .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding: 5rem 2.5rem 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem 4rem; padding: 5rem 2.5rem 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
     .hero-left { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; }
     .avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg); box-shadow: 0 0 0 1px var(--border); }
-    .social-links { display: flex; gap: 0.75rem; align-items: center; }
-    .social-link { color: var(--text-muted); transition: color 0.2s; display: flex; }
-    .social-link:hover { color: var(--text); }
+    .social-links { grid-column: 1 / -1; display: flex; flex-wrap: nowrap; gap: 0.75rem; }
+    .social-link { flex: 1 1 0; min-width: max-content; justify-content: center; padding: 10px 14px; font-size: 13px; font-weight: 500; text-decoration: none; color: var(--text); border-left: 0.5px solid var(--border-md); display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; transition: background 0.2s; }
+    .social-link:first-child { border-left: none; }
+    .social-link svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform 0.2s; }
+    .social-link:hover { background: rgba(255,255,255,0.06); }
+    .social-link:hover svg { transform: scale(1.15); }
     .hero-left h2 { font-size: 26px; color: var(--text); line-height: 1.2; }
     .hero-left p { font-size: 15px; line-height: 1.7; color: var(--text-hero-desc); }
-    .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .profile-row { display: flex; align-items: center; gap: 1.75rem; }
     .btn { padding: 10px 22px; border-radius: 99px; font-size: 13px; font-weight: 500; text-decoration: none; cursor: pointer; border: 0.5px solid; transition: opacity 0.2s; display: inline-block; font-family: 'DM Sans', sans-serif; }
     .btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
-    .btn-outline { background: transparent; color: var(--text); border-color: var(--border-md); }
     .btn:hover { opacity: 0.75; }
     .hero-right { display: flex; align-items: center; justify-content: center; }
     .logo-wrapper { background: #111; border-radius: 16px; display: flex; flex-direction: column; align-items: center; padding-bottom: 1.5rem; }
@@ -62,6 +64,14 @@
     @media (max-width: 700px) {
       .video-section { padding: 0 1.5rem 3rem; }
     }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: minmax(0, 1fr); }
+      .social-link { padding: 9px 10px; }
+    }
+    @media (max-width: 640px) {
+      .social-links { flex-wrap: wrap; }
+      .social-link { border-left: none; }
+    }
   </style>
 </head>
 <body>
@@ -77,24 +87,11 @@
 
 <div class="hero">
   <div class="hero-left">
-    <img class="avatar" src="photo.jpg" alt="Gonçalo Quinta" />
-    <p>I'm a theoretical physicist working on the unification of the fundamental forces of Nature. My past work includes black holes, quantum field theory in curved spacetime, quantum information and quantum computation.</p>
-    <div class="hero-links">
+    <div class="profile-row">
+      <img class="avatar" src="photo.jpg" alt="Gonçalo Quinta" />
       <a class="btn btn-primary" href="mailto:goncalo.quinta@tecnico.ulisboa.pt">Get in touch</a>
-      <a class="btn btn-outline" href="publications.html">View publications</a>
     </div>
-    <div class="social-links">
-      <a class="social-link" href="https://www.linkedin.com/in/goncaloquinta" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
-      </a>
-      <a class="social-link" href="https://medium.com/@gquinta" target="_blank" rel="noopener" aria-label="Medium">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
-        </svg>
-      </a>
-    </div>
+    <p>I'm a theoretical physicist working on the unification of the fundamental forces of Nature. My past work includes black holes, quantum field theory in curved spacetime, quantum information and quantum computation.</p>
   </div>
 
   <div class="hero-right">
@@ -102,6 +99,50 @@
       <div class="logo-shell" id="logo-shell" aria-hidden="true"></div>
       <div id="explore-button"></div>
     </div>
+  </div>
+
+  <div class="social-links">
+    <a class="social-link" href="https://www.linkedin.com/in/goncaloquinta" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      LinkedIn
+    </a>
+    <a class="social-link" href="https://medium.com/@gquinta" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+      </svg>
+      Medium
+    </a>
+    <a class="social-link" href="https://scholar.google.com/citations?user=YEFeRcUAAAAJ&hl=pt-PT" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+        <g transform="translate(27.009 -39.239)">
+          <path fill="#4285F4" d="M -3.264 51.509 C -3.264 50.719 -3.334 49.969 -3.454 49.239 L -14.754 49.239 L -14.754 53.749 L -8.284 53.749 C -8.574 55.229 -9.424 56.479 -10.684 57.329 L -10.684 60.329 L -6.824 60.329 C -4.564 58.239 -3.264 55.159 -3.264 51.509 Z"/>
+          <path fill="#34A853" d="M -14.754 63.239 C -11.514 63.239 -8.804 62.159 -6.824 60.329 L -10.684 57.329 C -11.764 58.049 -13.134 58.489 -14.754 58.489 C -17.884 58.489 -20.534 56.379 -21.484 53.529 L -25.464 53.529 L -25.464 56.619 C -23.494 60.539 -19.444 63.239 -14.754 63.239 Z"/>
+          <path fill="#FBBC05" d="M -21.484 53.529 C -21.734 52.809 -21.864 52.039 -21.864 51.239 C -21.864 50.439 -21.724 49.669 -21.484 48.949 L -21.484 45.859 L -25.464 45.859 C -26.284 47.479 -26.754 49.299 -26.754 51.239 C -26.754 53.179 -26.284 54.999 -25.464 56.619 L -21.484 53.529 Z"/>
+          <path fill="#EA4335" d="M -14.754 43.989 C -12.984 43.989 -11.404 44.599 -10.154 45.789 L -6.734 42.369 C -8.804 40.429 -11.514 39.239 -14.754 39.239 C -19.444 39.239 -23.494 41.939 -25.464 45.859 L -21.484 48.949 C -20.534 46.099 -17.884 43.989 -14.754 43.989 Z"/>
+        </g>
+      </svg>
+      Google Scholar
+    </a>
+    <a class="social-link" href="https://inspirehep.net/authors/1287160" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 388 388" aria-hidden="true">
+        <path fill="currentColor" transform="matrix(0.1,0,0,-0.1,0,388)" d="M 0,1940 V 0 H 1940 3880 V 1940 3880 H 1940 0 Z m 2880,-430 20,1590 h 500 V 670 h -537 l -1008,1610 -5,-1605 -500,-5 v 2430 h 538 z M 940,680 l -515,5 -5,1695 h 520 z"/>
+        <circle fill="#02e5fe" cx="67.107" cy="98.787" r="26"/>
+      </svg>
+      iNSPIRE
+    </a>
+    <a class="social-link" href="https://orcid.org/0000-0001-7614-3460" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" aria-hidden="true">
+        <path fill="#A6CE39" d="M256,128c0,70.7-57.3,128-128,128C57.3,256,0,198.7,0,128C0,57.3,57.3,0,128,0C198.7,0,256,57.3,256,128z"/>
+        <g fill="#FFFFFF">
+          <path d="M86.3,186.2H70.9V79.1h15.4v48.4V186.2z"/>
+          <path d="M108.9,79.1h41.6c39.6,0,57,28.3,57,53.6c0,27.5-21.5,53.6-56.8,53.6h-41.8V79.1z M124.3,172.4h24.5c34.9,0,42.9-26.5,42.9-39.7c0-21.5-13.7-39.7-43.7-39.7h-23.7V172.4z"/>
+          <path d="M88.7,56.8c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1C84.2,46.7,88.7,51.3,88.7,56.8z"/>
+        </g>
+      </svg>
+      ORCID
+    </a>
   </div>
 </div>
 
